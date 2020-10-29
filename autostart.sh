@@ -1,15 +1,12 @@
 #!/bin/bash
 
-/bin/bash ~/scripts/dwm-status.sh &
-/bin/bash ~/scripts/wp-autochange.sh &
-#picom -o 0.95 -i 0.88 --detect-rounded-corners --vsync --blur-background-fixed -f -D 5 -c -b
-picom --experimental-backends -o 0.95 -i 0.88 &
+# /bin/bash ~/scripts/dwm-status.sh &
+/bin/bash ~/scripts/wp-change.sh 
+#picom -o 0.95 -i 0.88 --detect-rounded-corners --vsync --blur-background-fixed -f -D 5 -c -u
+picom --experimental-backends -o 0.9 -i 0.8 &
 /bin/bash ~/scripts/tap-to-click.sh &
 /bin/bash ~/scripts/inverse-scroll.sh &
-# /bin/bash ~/scripts/setxmodmap-colemak.sh &
 nm-applet &
 fcitx &
-#xfce4-power-manager &
-#xfce4-volumed-pulse &
-/bin/bash ~/scripts/run-mailsync.sh &
+slstatus &
 ~/scripts/autostart_wait.sh &
