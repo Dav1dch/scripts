@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-xbacklight -inc +5
+intelbacklight -inc 375
