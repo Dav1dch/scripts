@@ -73,7 +73,7 @@ static const struct arg args[] = {
     // ram_perc, " %3s%% |", NULL	      }, { battery_perc, " 🔋%3s%% | ",
     //"BAT0" }, { datetime, "%s", "%a %F %T  " },
     {wifi_essid, " ﬉ %s ", "wlp3s0"},
-    {netspeed_rx, "%8sB/s⬇,", "wlp3s0"},
+    {netspeed_rx, "%8sB/s⬇", "wlp3s0"},
     {netspeed_tx, "%8sB/s⬆ ", "wlp3s0"},
     {run_command, " %4s ",
      "amixer sget Master | awk -F\"[][]\" '/%/ { print $2 }' | head -n1"},
