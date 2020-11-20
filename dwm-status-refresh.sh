@@ -129,8 +129,13 @@ print_wifi(){
 	nmcli connection show | grep wlp3s0 | awk '{print $1}'
 }
 
+#print_weather(){
+	#ipaddr=$(curl cip.cc | grep IP | awk '{print $3}')
+	#curl -s "wttr.in/$ipaddr?format=1" | awk '{printf "%s %s", $1,$2}'
+#}
 print_weather(){
-	curl -s "wttr.in/Guangzhou?format=1" | awk '{printf "%s %s", $1,$2}'
+	report=$(cat ./weather.out)
+	echo $report
 }
 
 show_record(){
@@ -166,7 +171,7 @@ get_bytes
 vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-xsetroot -name " ﬉ $(print_wifi)  $(print_mem)M ﰬ $vel_recv ﰵ $vel_trans $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
+xsetroot -name " ﬉ $(print_wifi) ﰬ $vel_recv ﰵ $vel_trans  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
 
 
 # Update old values to perform new calculations⬇️⬆️💿
