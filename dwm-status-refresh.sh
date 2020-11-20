@@ -61,17 +61,18 @@ print_temp(){
 
 get_time_until_charged() {
 
-	# parses acpitool's battery info for the remaining charge of all batteries and sums them up
-	sum_remaining_charge=$(acpitool -B | grep -E 'Remaining capacity' | awk '{print $4}' | grep -Eo "[0-9]+" | paste -sd+ | bc);
+	## parses acpitool's battery info for the remaining charge of all batteries and sums them up
+	#sum_remaining_charge=$(acpi -b | grep -E 'Remaining capacity' | awk '{print $4}' | grep -Eo "[0-9]+" | paste -sd+ | bc);
 
-	# finds the rate at which the batteries being drained at
-	present_rate=$(acpitool -B | grep -E 'Present rate' | awk '{print $4}' | grep -Eo "[0-9]+" | paste -sd+ | bc);
+	## finds the rate at which the batteries being drained at
+	#present_rate=$(acpi -b | grep -E 'Present rate' | awk '{print $4}' | grep -Eo "[0-9]+" | paste -sd+ | bc);
 
-	# divides current charge by the rate at which it's falling, then converts it into seconds for `date`
-	seconds=$(bc <<< "scale = 10; ($sum_remaining_charge / $present_rate) * 3600");
+	## divides current charge by the rate at which it's falling, then converts it into seconds for `date`
+	#seconds=$(bc <<< "scale = 10; ($sum_remaining_charge / $present_rate) * 3600");
 
-	# prettifies the seconds into h:mm:ss format
-	pretty_time=$(date -u -d @${seconds} +%T);
+	## prettifies the seconds into h:mm:ss format
+	#pretty_time=$(date -u -d ${seconds} +%T);
+	pretty_time=$(acpi -b | grep 0: | awk '{print $5}')
 
 	echo $pretty_time;
 }
@@ -124,6 +125,14 @@ print_date(){
 	date '+%Y-%m-%d %H:%M %A'
 }
 
+print_wifi(){
+	nmcli connection show | grep wlp3s0 | awk '{print $1}'
+}
+
+print_weather(){
+	curl -s "wttr.in/Guangzhou?format=1" | awk '{printf "%s %s", $1,$2}'
+}
+
 show_record(){
 	test -f /tmp/r2d2 || return
 	rp=$(cat /tmp/r2d2 | awk '{print $2}')
@@ -144,7 +153,7 @@ export IDENTIFIER="unicode"
 #. "$DIR/dwmbar-functions/dwm_backlight.sh"
 . "$DIR/dwmbar-functions/dwm_alsa.sh"
 #. "$DIR/dwmbar-functions/dwm_pulse.sh"
-#. "$DIR/dwmbar-functions/dwm_weather.sh"
+# . "$DIR/dwmbar-functions/dwm_weather.sh"
 #. "$DIR/dwmbar-functions/dwm_vpn.sh"
 #. "$DIR/dwmbar-functions/dwm_network.sh"
 #. "$DIR/dwmbar-functions/dwm_keyboard.sh"
@@ -157,9 +166,10 @@ get_bytes
 vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-xsetroot -name "  💿 $(print_mem)M ⬇️ $vel_recv ⬆️ $vel_trans $(dwm_alsa) [ $(print_bat) ]$(show_record) $(print_date) "
+xsetroot -name " ﬉ $(print_wifi)  $(print_mem)M ﰬ $vel_recv ﰵ $vel_trans $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
 
-# Update old values to perform new calculations
+
+# Update old values to perform new calculations⬇️⬆️💿
 old_received_bytes=$received_bytes
 old_transmitted_bytes=$transmitted_bytes
 old_time=$now
