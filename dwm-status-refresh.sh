@@ -21,7 +21,7 @@ function get_velocity {
 	old_value=$2
 	now=$3
 
-	timediff=$(($now - $old_time))
+	timediff=$(($now-$old_time))
 	velKB=$(echo "1000000000*($value-$old_value)/1024/$timediff" | bc)
 	if test "$velKB" -gt 1024
 	then
@@ -32,10 +32,10 @@ function get_velocity {
 }
 
 # Get initial values
-#get_bytes
-#old_received_bytes=$received_bytes
-#old_transmitted_bytes=$transmitted_bytes
-#old_time=$now
+get_bytes
+old_received_bytes=$received_bytes
+old_transmitted_bytes=$transmitted_bytes
+old_time=$now
 
 print_volume() {
 	volume="$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')"
@@ -95,7 +95,7 @@ get_battery_charging_status() {
 	if $(acpi -b | grep 0: | grep --quiet Discharging)
 	then
 		echo "🔋";
-	else # acpi can give Unknown or Charging if charging, https://unix.stackexchange.com/questions/203741/lenovo-t440s-battery-status-unknown-but-charging
+	else # acpi can 🔋🔌give Unknown or Charging if charging, https://unix.stackexchange.com/questions/203741/lenovo-t440s-battery-status-unknown-but-charging
 		echo "🔌";
 	fi
 }
@@ -171,13 +171,13 @@ get_bytes
 vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-xsetroot -name "  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
+xsetroot -name "ﰬ $vel_recv ﰵ $vel_trans  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
 #xsetroot -name " ﬉ $(print_wifi) ﰬ $vel_recv ﰵ $vel_trans  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
 
 
 # Update old values to perform new calculations⬇️⬆️💿
-#old_received_bytes=$received_bytes
-#old_transmitted_bytes=$transmitted_bytes
-#old_time=$now
+old_received_bytes=$received_bytes
+old_transmitted_bytes=$transmitted_bytes
+old_time=$now
 
 exit 0
