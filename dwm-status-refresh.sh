@@ -94,9 +94,9 @@ get_battery_charging_status() {
 
 	if $(acpi -b | grep 0: | grep --quiet Discharging)
 	then
-		echo "🔋";
+		echo "Battery";
 	else # acpi can 🔋🔌give Unknown or Charging if charging, https://unix.stackexchange.com/questions/203741/lenovo-t440s-battery-status-unknown-but-charging
-		echo "🔌";
+		echo "Charging";
 	fi
 }
 
@@ -122,7 +122,8 @@ print_bat(){
 }
 
 print_date(){
-	date '+%Y-%m-%d %H:%M %A'
+	date '+%Y-%m-%d %H:%M'
+	# date '+%Y-%m-%d %H:%M %A'
 }
 
 print_wifi(){
@@ -171,7 +172,7 @@ get_bytes
 vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-xsetroot -name "ﰬ $vel_recv ﰵ $vel_trans  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
+xsetroot -name " ﰬ $vel_recv ﰵ $vel_trans  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
 #xsetroot -name " ﬉ $(print_wifi) ﰬ $vel_recv ﰵ $vel_trans  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
 
 
