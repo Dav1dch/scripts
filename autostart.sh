@@ -9,7 +9,8 @@ picom --experimental-backends &
 /bin/bash ~/scripts/tap-to-click.sh &
 /bin/bash ~/scripts/inverse-scroll.sh &
 nm-applet &
-fcitx5 &
+dunst &
+fcitx &
 xfce4-power-manager &
 # dwall -s tokyostreet &
 # slstatus &

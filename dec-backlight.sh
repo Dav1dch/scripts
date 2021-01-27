@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-intelbacklight -dec 375
+echo "david" | sudo -S intelbacklight -dec 375
