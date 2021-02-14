@@ -48,8 +48,10 @@ print_volume() {
 }
 
 print_mem(){
+  MEMUSED=$(free -h | awk '(NR == 2) {print $3}')
+  MEMTOT=$(free -h |awk '(NR == 2) {print $2}')
 	memfree=$(($(grep -m1 'MemAvailable:' /proc/meminfo | awk '{print $2}') / 1024))
-	echo -e "$memfree"
+	echo -e "$MEMUSED/$MEMTOT"
 }
 
 print_temp(){
@@ -84,19 +86,30 @@ get_battery_combined_percent() {
 
 	# get amount of batteries in the device
 	battery_number=$(acpi -b | wc -l);
+	percent=($total_charge )
+	echo $percent
 
-	percent=$(expr $total_charge );
-
-	echo $percent;
 }
 
 get_battery_charging_status() {
 
 	if $(acpi -b | grep 0: | grep --quiet Discharging)
 	then
-		echo "Battery";
+		percent=$(get_battery_combined_percent)
+			if [ "$percent">="90" ]; then
+				echo 
+		elif [ "$percent">="75" ]; then
+				echo 
+		elif [ "$percent">="50" ]; then
+				echo 
+		elif [ "$percent">="20" ]; then
+				echo 
+		else
+				echo 
+		fi;
+		#echo "🔋";
 	else # acpi can 🔋🔌give Unknown or Charging if charging, https://unix.stackexchange.com/questions/203741/lenovo-t440s-battery-status-unknown-but-charging
-		echo "Charging";
+		echo "🔌";
 	fi
 }
 
@@ -116,13 +129,13 @@ print_bat(){
 		##systemctl --user start inhibit-lid-sleep-on-battery.service
 		#echo -e "${charge}"
 	#fi
-	echo " $(get_battery_charging_status) $(get_battery_combined_percent)% $(get_time_until_charged )";
+	echo "  $(get_battery_charging_status) BAT: $(get_battery_combined_percent)% $(get_time_until_charged )";
 	# echo "$(get_battery_combined_percent)%, $(get_time_until_charged )";
   
 }
 
 print_date(){
-	date '+%Y-%m-%d %H:%M'
+	date '+%m-%d %H:%M %a'
 	# date '+%Y-%m-%d %H:%M %A'
 }
 
@@ -166,13 +179,14 @@ export IDENTIFIER="unicode"
 #. "$DIR/dwmbar-functions/dwm_ccurse.sh"
 #. "$DIR/dwmbar-functions/dwm_date.sh"
 
-get_bytes
+#get_bytes
 
 # Calculates speeds
-vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
-vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
+#vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
+#vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-xsetroot -name " ﰬ $vel_recv ﰵ $vel_trans  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
+xsetroot -name "  💻 MEM: $(print_mem)B  |  $(dwm_alsa)  |$(print_bat) |  $(print_weather)  $(print_date) "
+#xsetroot -name " ﰬ $vel_recv  ﰵ $vel_trans |  $(print_mem)M | $(dwm_alsa) |$(print_bat) | $(print_date) $(print_weather) "
 #xsetroot -name " ﬉ $(print_wifi) ﰬ $vel_recv ﰵ $vel_trans  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
 
 

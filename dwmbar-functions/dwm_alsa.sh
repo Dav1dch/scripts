@@ -11,13 +11,13 @@ dwm_alsa () {
     printf "%s" "$SEP1"
     if [ "$IDENTIFIER" = "unicode" ]; then
         if [ "$VOL" -eq 0 ]; then
-            printf "婢"
+            printf "婢 VOL: MUTE"
         elif [ "$VOL" -gt 0 ] && [ "$VOL" -le 33 ]; then
-            printf "奔 %s%%" "$VOL"
+            printf "奔 VOL: %s%%" "$VOL"
         elif [ "$VOL" -gt 33 ] && [ "$VOL" -le 66 ]; then
-            printf "墳 %s%%" "$VOL"
+            printf "墳 VOL: %s%%" "$VOL"
         else
-            printf " %s%%" "$VOL"
+            printf "  VOL: %s%%" "$VOL"
         fi
     else
         if [ "$VOL" -eq 0 ]; then

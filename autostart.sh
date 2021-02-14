@@ -8,6 +8,7 @@ picom --experimental-backends &
 # picom &
 /bin/bash ~/scripts/tap-to-click.sh &
 /bin/bash ~/scripts/inverse-scroll.sh &
+/bin/bash ~/.config/polybar/launch.sh &
 nm-applet &
 dunst &
 fcitx &
