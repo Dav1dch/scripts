@@ -51,7 +51,7 @@ print_mem(){
   MEMUSED=$(free -h | awk '(NR == 2) {print $3}')
   MEMTOT=$(free -h |awk '(NR == 2) {print $2}')
 	memfree=$(($(grep -m1 'MemAvailable:' /proc/meminfo | awk '{print $2}') / 1024))
-	echo -e "$MEMUSED/$MEMTOT"
+	echo -e "$MEMUSED""b/$MEMTOT""b"
 }
 
 print_temp(){
@@ -185,7 +185,7 @@ export IDENTIFIER="unicode"
 #vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 #vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-xsetroot -name "  💻 MEM: $(print_mem)B  |  $(dwm_alsa)  |$(print_bat) |  $(print_weather)  $(print_date) "
+xsetroot -name "  💻 MEM: $(print_mem)  |  $(dwm_alsa)  |$(print_bat) |  $(print_weather)  $(print_date) "
 #xsetroot -name " ﰬ $vel_recv  ﰵ $vel_trans |  $(print_mem)M | $(dwm_alsa) |$(print_bat) | $(print_date) $(print_weather) "
 #xsetroot -name " ﬉ $(print_wifi) ﰬ $vel_recv ﰵ $vel_trans  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
 
