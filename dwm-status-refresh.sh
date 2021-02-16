@@ -135,7 +135,7 @@ print_bat(){
 }
 
 print_date(){
-	date '+%m-%d %H:%M %a'
+	date '+%m-%d %a ⏰%H:%M'
 	# date '+%Y-%m-%d %H:%M %A'
 }
 
@@ -185,7 +185,7 @@ export IDENTIFIER="unicode"
 #vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 #vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-xsetroot -name "  💻 MEM: $(print_mem)  |  $(dwm_alsa)  |$(print_bat) |  $(print_weather)  $(print_date) "
+xsetroot -name "  💻 MEM: $(print_mem)  $(dwm_alsa)$(print_bat) $(print_weather)  📆 $(print_date) "
 #xsetroot -name " ﰬ $vel_recv  ﰵ $vel_trans |  $(print_mem)M | $(dwm_alsa) |$(print_bat) | $(print_date) $(print_weather) "
 #xsetroot -name " ﬉ $(print_wifi) ﰬ $vel_recv ﰵ $vel_trans  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
 
