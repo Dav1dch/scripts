@@ -11,7 +11,7 @@ picom --experimental-backends &
 /bin/bash ~/.config/polybar/launch.sh &
 nm-applet &
 dunst &
-fcitx &
+#fcitx &
 xfce4-power-manager &
 # dwall -s tokyostreet &
 # slstatus &

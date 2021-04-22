@@ -129,7 +129,7 @@ print_bat(){
 		##systemctl --user start inhibit-lid-sleep-on-battery.service
 		#echo -e "${charge}"
 	#fi
-	echo "  $(get_battery_charging_status) BAT: $(get_battery_combined_percent)% $(get_time_until_charged )";
+	echo "  $(get_battery_charging_status) BAT: $(get_battery_combined_percent)% $(get_time_until_charged)";
 	# echo "$(get_battery_combined_percent)%, $(get_time_until_charged )";
   
 }
@@ -185,7 +185,7 @@ export IDENTIFIER="unicode"
 #vel_recv=$(get_velocity $received_bytes $old_received_bytes $now)
 #vel_trans=$(get_velocity $transmitted_bytes $old_transmitted_bytes $now)
 
-xsetroot -name "  💻 MEM: $(print_mem)  $(dwm_alsa)$(print_bat) $(print_weather)  📆 $(print_date) "
+xsetroot -name "   MEM: $(print_mem)  $(dwm_alsa)$(print_bat) $(print_weather)  📆 $(print_date) "
 #xsetroot -name " ﰬ $vel_recv  ﰵ $vel_trans |  $(print_mem)M | $(dwm_alsa) |$(print_bat) | $(print_date) $(print_weather) "
 #xsetroot -name " ﬉ $(print_wifi) ﰬ $vel_recv ﰵ $vel_trans  $(print_mem)M $(dwm_alsa) [$(print_bat)]$(show_record) $(print_date) $(print_weather) "
 
