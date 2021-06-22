@@ -1,0 +1,2 @@
+touchegg &
+latte-dock &

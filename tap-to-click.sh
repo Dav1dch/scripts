@@ -9,3 +9,5 @@ tap_to_click_id=`xinput list-props $id | \
 
 # Set the property to true
 xinput --set-prop $id $tap_to_click_id 1
+xinput --set-prop 18 334 0.2
+
