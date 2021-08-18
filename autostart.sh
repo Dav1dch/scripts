@@ -1,15 +1,14 @@
 #!/bin/bash
 
-feh --bg-fill ~/Pictures/bigsur.jpg &
+feh --bg-fill ~/Pictures/Wallpapers/girl.jpg &
 /bin/bash ~/scripts/dwm-status.sh &
 # /bin/bash ~/scripts/wp-autochange.sh &
-/bin/bash ~/scripts/dwm-weather.sh &
+#/bin/bash ~/scripts/dwm-weather.sh &
 # picom -o 0.95 -i 0.88 --detect-rounded-corners --vsync --blur-background-fixed -f -D 5 -c -u &
 picom --experimental-backends &
 # picom &
 /bin/bash ~/scripts/tap-to-click.sh &
 /bin/bash ~/scripts/inverse-scroll.sh &
-/bin/bash ~/.config/polybar/launch.sh &
 nm-applet &
 pa-applet &
 dunst &
